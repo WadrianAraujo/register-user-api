@@ -1,5 +1,7 @@
 package br.com.wax.registeruserapi.domain.entity;
 
+import br.com.wax.registeruserapi.domain.user.DTOUser;
+import br.com.wax.registeruserapi.domain.user.DTOUserUpdate;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -17,17 +19,23 @@ public class User {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Size(min = 5, max =  100, message = "The username need from 5 to 100 characters")
-    @NotBlank(message = "The username is necessary")
     private String login;
-
-    @Email
     private String email;
-
-    @Size(max = 15, message = "The cell phone number cannot exceed 15 characters")
     private String phoneNumber;
 
+    public User(DTOUser data) {
+        this.email = data.email();
+        this.login = data.login();
+        this.phoneNumber = data.phoneNumber();
+    }
 
+    public void updateData(DTOUserUpdate data) {
+        if (data.login() != null){
+            this.login = data.login();
+        }
+        if (data.phoneNumber() != null){
+            this.phoneNumber = data.phoneNumber();
+        }
 
+    }
 }
