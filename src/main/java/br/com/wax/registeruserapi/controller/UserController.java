@@ -5,6 +5,7 @@ import br.com.wax.registeruserapi.domain.repository.UserRepository;
 import br.com.wax.registeruserapi.domain.user.DTOUser;
 import br.com.wax.registeruserapi.domain.user.DTOUserListing;
 import br.com.wax.registeruserapi.domain.user.DTOUserUpdate;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
+@SecurityRequirement(name = "bearer-key")
 public class UserController {
 
     @Autowired
